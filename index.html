@@ -941,6 +941,65 @@
 </body>
 
 </html>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. टॉप नेविगेशन बटन्स (Action Tabs)
+  const navButtons = document.querySelectorAll(".action-badge-group button, .btn-badge, .nav-btn");
+  navButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // एक्टिव क्लास टॉगल करने के लिए
+      navButtons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      
+      const tabName = btn.innerText.trim();
+      alert(tabName + " सेक्शन चुना गया।");
+      // यहाँ आप उस सेक्शन से जुड़ा डेटा फ़िल्टर या डिस्प्ले कर सकते हैं
+    });
+  });
+
+  // 2. सर्च / 'Ask' बटन और इनपुट बॉक्स
+  const askInput = document.querySelector('input[type="text"]');
+  const askBtn = document.querySelector('.btn-submit, .btn-ask, button:has-text("Ask")') || document.querySelector('button[type="submit"]');
+
+  function handleQuery() {
+    if (!askInput) return;
+    const query = askInput.value.trim();
+    if (!query) {
+      alert("कृपया कोई सवाल या धारा दर्ज करें।");
+      return;
+    }
+    alert("सर्च किया जा रहा है: " + query);
+    // यहाँ आप अपना API कॉल या डेटाबेस सर्च लॉजिक जोड़ सकते हैं
+    askInput.value = "";
+  }
+
+  if (askBtn) {
+    askBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      handleQuery();
+    });
+  }
+
+  if (askInput) {
+    askInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        handleQuery();
+      }
+    });
+  }
+
+  // 3. रिपोर्ट बटन
+  const reportBtn = document.querySelector('.report-btn, a[href*="report"]');
+  if (reportBtn) {
+    reportBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      alert("रिपोर्ट डायलॉग ओपन हो रहा है...");
+    });
+  }
+});
+</script>
+
 
 
 
